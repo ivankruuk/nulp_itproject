@@ -59,4 +59,9 @@ async function handleDownload(req, res) {
     await file.save()
     res.download(file.path, file.originalName)
 }
-app.listen(process.env.PORT)
+if (process.env.NODE_ENV !== "test") {
+    app.listen(process.env.PORT, () => console.log(`Server running on port ${process.env.PORT}`));
+}
+
+module.exports = app; // Export the app for testing
+
